@@ -8,14 +8,13 @@ export const AuthProvider = ({children})=>{
     const navigate = useNavigate();
      
     const [isAuth, setIsAuth] = useState(false);
-    const [loginCred, setLoginCred] = useState({
-        email : "",
-        password:"",
-    });
+    
     const [userInfo, setUserInfo] = useState({
         email : "",
         password:"",
     })
+  console.log(userInfo)
+
    const handleChange = (e)=>{
      const {name, value} = e.target;
      setUserInfo({
@@ -37,7 +36,7 @@ export const AuthProvider = ({children})=>{
           headers: {
      'Content-Type': 'application/json',
        },
-    body: JSON.stringify(loginCred),
+    body: JSON.stringify(userInfo),
    })
     .then(response => response.json())
    .then(data => {
@@ -49,7 +48,7 @@ export const AuthProvider = ({children})=>{
    
         const upDateLoginCred = (e)=>{
             e.preventDefault();
-            setLoginCred( {...userInfo}) 
+           
             login();
           
             setUserInfo({
